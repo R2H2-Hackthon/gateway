@@ -1,7 +1,7 @@
 module V1
     class CartoesController < ActionController::API
-        def habilitar_primeiro_cartao
-            render json: Agillitas.new.habilitar_cartao(0, 0, 100.00, '123456')
+        def habilitar_cartao
+            render json: Agillitas.new.habilitar_cartao(params[:id_cartao], params[:id_usuario], 100.00, '123456')
         end
 
         def saldo

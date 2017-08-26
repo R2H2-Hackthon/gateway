@@ -16,43 +16,25 @@ class Agillitas
         }
     end
 
-    def habilitar_cartao(index_cartao, index_usuario, valor, senha)
-        usuarios = [
-            { 
-                'nome': 'Rafael',
-                'sobrenome': 'Nunes Vieira',
-                'dataNascimento': '1992-02-14',
-                'cpf': '42053723882',
-                'email': 'nvieirarafael@gmail.com',
-                'telResidencial': '019981566127',
-                'telCelular': '019981566127',
-                'logradouro': 'Rua Benedita Amaral Pinto',
-                'complemento': 'Numero 538 Ap. 36 Torre 5',
-                'cidade': 'Campinas',
-                'estado': 'SP',
-                'pais': 'Brasil',
-                'codigoPostal': '13080080' 
-            },
-        ]
+    def habilitar_cartao(id_cartao, id_usuario, valor, senha)
+        cartoes = {
+            '3713100018881': { 'pin': 1006, 'time': 4, 'numero': 4213040011931806, 'validade': '03/20', 'cvv': 463 },
+            # '3713100018899': { 'pin': 4511, 'time': 4, 'numero': 4213040011911097, 'validade': '03/20', 'cvv': 36 },
+            # '3713100018907': { 'pin': 2257, 'time': 4, 'numero': 4213040011987212, 'validade': '03/20', 'cvv': 35 },
+            # '3713100018915': { 'pin': 3461, 'time': 4, 'numero': 4213040011955904, 'validade': '03/20', 'cvv': 14 },
+            # '3713100018923': { 'pin': 8402, 'time': 4, 'numero': 4213040011990141, 'validade': '03/20', 'cvv': 59 },
+            # '3713100018931': { 'pin': 1406, 'time': 4, 'numero': 4213040011958320, 'validade': '03/20', 'cvv': 653 },
+            # '3713100018949': { 'pin': 7144, 'time': 4, 'numero': 4213040011903615, 'validade': '03/20', 'cvv': 426 },
+            # '3713100018956': { 'pin': 3481, 'time': 4, 'numero': 4213040011979714, 'validade': '03/20', 'cvv': 383 },
+            # '3713100018964': { 'pin': 5728, 'time': 4, 'numero': 4213040011911519, 'validade': '03/20', 'cvv': 438 }
+        }
 
-        cartoes = [
-            { 'id_cartao': '3713100018881', 'pin': 1006, 'time': 4, 'numero': 4213040011931806, 'validade': '03/20', 'cvv': 463 },
-            # { 'id_cartao': '3713100018899', 'pin': 4511, 'time': 4, 'numero': 4213040011911097, 'validade': '03/20', 'cvv': 36 },
-            # { 'id_cartao': '3713100018907', 'pin': 2257, 'time': 4, 'numero': 4213040011987212, 'validade': '03/20', 'cvv': 35 },
-            # { 'id_cartao': '3713100018915', 'pin': 3461, 'time': 4, 'numero': 4213040011955904, 'validade': '03/20', 'cvv': 14 },
-            # { 'id_cartao': '3713100018923', 'pin': 8402, 'time': 4, 'numero': 4213040011990141, 'validade': '03/20', 'cvv': 59 },
-            # { 'id_cartao': '3713100018931', 'pin': 1406, 'time': 4, 'numero': 4213040011958320, 'validade': '03/20', 'cvv': 653 },
-            # { 'id_cartao': '3713100018949', 'pin': 7144, 'time': 4, 'numero': 4213040011903615, 'validade': '03/20', 'cvv': 426 },
-            # { 'id_cartao': '3713100018956', 'pin': 3481, 'time': 4, 'numero': 4213040011979714, 'validade': '03/20', 'cvv': 383 },
-            # { 'id_cartao': '3713100018964', 'pin': 5728, 'time': 4, 'numero': 4213040011911519, 'validade': '03/20', 'cvv': 438 }
-        ]
-
-        cartao = cartoes[index_cartao]
-        usuario = usuarios[index_usuario]
+        cartao = cartoes[id_cartao]
+        usuario = Usuario.find_by id: id_usuario
         
         body = {
             cartao: {
-                idCartao: cartao[:id_cartao],
+                idCartao: id_cartao,
                 valor: valor,
                 contrasenha: senha,
                 portador: {
@@ -85,6 +67,6 @@ class Agillitas
     def cartoes_saldo(id_cartao)
         response = self.class.get("/cartoes/#{ id_cartao }/saldo", headers: @headers)
 
-        response.body
+        JSON.parse(response.body)['saldo']['valor']
     end    
 end

@@ -7,5 +7,13 @@ module V1
         def saldo
             render json: Agillitas.new.cartoes_saldo(params[:id_cartao])
         end
+
+        def autorizar_pagamento
+            render json: Visa.new.autorizar_pagamento(params[:id_cartao], params[:valor])
+        end
+
+        def helloworld
+            render json: Visa.new.helloworld
+        end
     end    
 end

@@ -11,7 +11,11 @@ module V1
 
     # GET /usuarios/1
     def show
-      render json: @usuario
+      usuario = @usuario.attributes
+
+      usuario[:avatar] = "https://api.adorable.io/avatars/175/#{ usuario['email'] }"
+
+      render json: usuario
     end
 
     # POST /usuarios

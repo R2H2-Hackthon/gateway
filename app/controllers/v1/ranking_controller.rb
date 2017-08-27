@@ -11,6 +11,9 @@ module V1
                 _usuario
             end
 
+            # Ordenando por pontuacao descendente 
+            usuarios.sort! { |a, b|  b['pontuacao'] <=> a['pontuacao'] }
+
             render json: usuarios
         end
 

@@ -6,14 +6,22 @@ module V1
     def index
       @usuarios = Usuario.all
 
-      render json: @usuarios
+      usuarios = @usuarios.map do |usuario|
+        usuario = usuario.attributes
+
+        usuario[:avatar] = avatar(usuario)
+
+        usuario
+      end
+      
+      render json: usuarios
     end
 
     # GET /usuarios/1
     def show
       usuario = @usuario.attributes
 
-      usuario[:avatar] = "https://api.adorable.io/avatars/175/#{ usuario['email'] }"
+      usuario[:avatar] = avatar(usuario)
 
       render json: usuario
     end
@@ -44,28 +52,33 @@ module V1
     end
 
     private
-      # Use callbacks to share common setup or constraints between actions.
-      def set_usuario
-        @usuario = Usuario.find(params[:id])
-      end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_usuario
+      @usuario = Usuario.find(params[:id])
+    end
 
-      # Only allow a trusted parameter "white list" through.
-      def usuario_params
-        params.fetch(:usuario, {}).permit(
-          :nome,
-          :sobrenome,
-          :dataNascimento,
-          :cpf,
-          :email,
-          :telResidencial,
-          :telCelular,
-          :logradouro,
-          :complemento,
-          :cidade,
-          :estado,
-          :pais,
-          :codigoPostal,
-        )
-      end
+    # Only allow a trusted parameter "white list" through.
+    def usuario_params
+      params.fetch(:usuario, {}).permit(
+        :nome,
+        :sobrenome,
+        :dataNascimento,
+        :cpf,
+        :email,
+        :telResidencial,
+        :telCelular,
+        :logradouro,
+        :complemento,
+        :cidade,
+        :estado,
+        :pais,
+        :codigoPostal,
+        :papel
+      )
+    end
+
+    def avatar(usuario)
+      "https://api.adorable.io/avatars/175/#{ usuario['email'] }"
+    end
   end
 end

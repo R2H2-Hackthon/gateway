@@ -6,6 +6,9 @@ Rails.application.routes.draw do
     post 'cartoes/:id_cartao/autorizar/pagamento', to: 'cartoes#autorizar_pagamento'
     post 'app/registrar', to: 'app#registrar'
     post 'app/enviar/mensagem', to: 'app#enviar_mensagem'
+
+    get 'ranking', to: 'ranking#index'
+    post 'ranking/:id_usuario/pontuar', to: 'ranking#pontuar'
     
     get 'helloworld', to: 'cartoes#helloworld'
 

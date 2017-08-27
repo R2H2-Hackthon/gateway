@@ -60,7 +60,9 @@ module V1
         end
 
         def solicitar
-            render json: Agillitas.new.solicitar_cartao(params[:id_usuario], params[:valor], params[:senha])
+            Agillitas.new.solicitar_cartao(params[:id_usuario], params[:valor], params[:senha])
+
+            render json: Usuario.all
         end
 
         def helloworld

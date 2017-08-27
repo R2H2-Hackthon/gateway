@@ -61,6 +61,13 @@ class Agillitas
         }
         
         response = self.class.post('/cartoes', body: body.to_json, headers: @headers)        
+
+        usuario.cartoes_vinculados << cartao.proxy
+        usuario.cartoes_vinculados.uniq!
+        usuario.save
+
+        cartao.vinculado = true
+        cartao.save
         
         response.body
     end

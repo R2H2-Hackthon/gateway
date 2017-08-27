@@ -1,5 +1,44 @@
 module V1
     class CartoesController < ActionController::API
+        before_action :set_cartao, only: [:show, :update, :destroy]
+
+        # GET /cartoes
+        def index
+            @cartoes = Cartao.all
+
+            render json: @cartoes
+        end
+
+        # GET /cartoes/1
+        def show
+            render json: @cartao
+        end
+
+        # POST /cartoes
+        def create
+            @cartao = Cartao.new(cartao_params)
+
+            if @cartao.save
+                render json: @cartao, status: :created
+            else
+                render json: @cartao.errors, status: :unprocessable_entity
+            end
+        end
+
+        # PATCH/PUT /cartoes/1
+        def update
+            if @cartao.update(cartao_params)
+                render json: @cartao
+            else
+                render json: @cartao.errors, status: :unprocessable_entity
+            end
+        end
+
+        # DELETE /cartoes/1
+        def destroy
+            @cartao.destroy
+        end
+
         def habilitar_cartao
             render json: Agillitas.new.habilitar_cartao(params[:id_cartao], params[:id_usuario], 100.00, '123456')
         end
@@ -14,6 +53,17 @@ module V1
 
         def helloworld
             render json: Visa.new.helloworld
+        end
+
+        private
+        # Use callbacks to share common setup or constraints between actions.
+        def set_cartao
+            @cartao = Cartao.find(params[:id])
+        end
+
+        # Only allow a trusted parameter "white list" through.
+        def cartao_params
+            params.fetch(:cartao, {}).permit(:proxy, :pin, :time, :numero, :validade, :cvv)
         end
     end    
 end

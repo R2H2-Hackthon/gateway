@@ -6,7 +6,7 @@ class Agillitas
     ACCESS_TOKEN = 'e6325e48-164d-38ec-9f29-2366b5cbd7ca'.freeze
 
     CARTOES = {
-        '3713100018881': { 'pin': 1006, 'time': 4, 'numero': 4213040011931806, 'validade': '03/20', 'cvv': 463 },
+        '3713100018881': { 'proxy': '3713100018881', 'pin': 1006, 'time': 4, 'numero': 4213040011931806, 'validade': '03/20', 'cvv': 463 },
         # '3713100018899': { 'pin': 4511, 'time': 4, 'numero': 4213040011911097, 'validade': '03/20', 'cvv': 36 },
         # '3713100018907': { 'pin': 2257, 'time': 4, 'numero': 4213040011987212, 'validade': '03/20', 'cvv': 35 },
         # '3713100018915': { 'pin': 3461, 'time': 4, 'numero': 4213040011955904, 'validade': '03/20', 'cvv': 14 },
@@ -31,7 +31,7 @@ class Agillitas
 
     def habilitar_cartao(id_cartao, id_usuario, valor, senha)
         
-        cartao = CARTOES[id_cartao]
+        cartao = Cartao.find_by proxy: id_cartao
         usuario = Usuario.find_by id: id_usuario
         
         body = {

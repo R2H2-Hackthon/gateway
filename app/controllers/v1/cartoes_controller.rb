@@ -68,8 +68,8 @@ module V1
         def extrato_mes_atual
             render json: Agillitas.new.extrato(
                 params[:id_cartao], 
-                "#{Time.current.year}-#{Time.current.strftime("%m")}-00", 
-                "#{Time.current.year}-#{Time.current.strftime("%m")}-31"
+                "#{Time.current.year}-#{Time.current.strftime("%m")}-01", 
+                "#{Time.current.year}-#{Time.current.strftime("%m")}-#{Time.current.end_of_month.strftime("%d")}"
             )
         end
 

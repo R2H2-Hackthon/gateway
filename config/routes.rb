@@ -3,7 +3,8 @@ Rails.application.routes.draw do
     get 'cartoes/:id_cartao/habilitar/:id_usuario', to: 'cartoes#habilitar_cartao'
     get 'cartoes/:id_cartao/saldo', to: 'cartoes#saldo'
     post 'cartoes/:id_cartao/autorizar/pagamento', to: 'cartoes#autorizar_pagamento'
-
+    post 'app/registrar', to: 'app#registrar'
+    
     get 'helloworld', to: 'cartoes#helloworld'
 
     resources :usuarios

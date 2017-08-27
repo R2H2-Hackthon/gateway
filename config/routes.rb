@@ -1,8 +1,5 @@
-Rails.application.routes.draw do  
-  
+Rails.application.routes.draw do      
   namespace :v1, :defaults => { :format => 'json' } do
-    resources :cartoes
-
     get 'cartoes/:id_cartao/habilitar/:id_usuario', to: 'cartoes#habilitar_cartao'
     get 'cartoes/:id_cartao/saldo', to: 'cartoes#saldo'
     
@@ -12,6 +9,8 @@ Rails.application.routes.draw do
     
     get 'helloworld', to: 'cartoes#helloworld'
 
+    resources :cartoes
+    resources :missoes
     resources :usuarios
   end  
 

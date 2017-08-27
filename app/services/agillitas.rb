@@ -16,7 +16,6 @@ class Agillitas
         # '3713100018956': { 'pin': 3481, 'time': 4, 'numero': 4213040011979714, 'validade': '03/20', 'cvv': 383 },
         # '3713100018964': { 'pin': 5728, 'time': 4, 'numero': 4213040011911519, 'validade': '03/20', 'cvv': 438 }
     }.freeze
-
     
     base_uri 'https://api-visa.sensedia.com/sandbox/visa/agillitas/v1'
 

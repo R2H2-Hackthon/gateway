@@ -6,7 +6,7 @@ module V1
         def index
             @cartoes = Cartao.all
 
-            render json: @cartoes
+            render json: @cartoes.order('id')
         end
 
         # GET /cartoes/1

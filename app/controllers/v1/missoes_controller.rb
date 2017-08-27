@@ -47,7 +47,7 @@ module V1
 
       # Only allow a trusted parameter "white list" through.
       def missao_params
-        params.fetch(:missao, {}).permit(:titulo, :descricao, :imagem, :pontuacao)
+        params.fetch(:missao, {}).permit(:titulo, :descricao, :imagem, :pontuacao, :efetuada)
       end
   end
 end

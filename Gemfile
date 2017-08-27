@@ -45,4 +45,6 @@ gem 'httparty'
 
 gem 'rack-cors', :require => 'rack/cors'
 
+gem 'fcm'
+
 ruby "2.4.0"

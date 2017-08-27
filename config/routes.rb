@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     get 'cartoes/:id_cartao/saldo', to: 'cartoes#saldo'
     post 'cartoes/:id_cartao/autorizar/pagamento', to: 'cartoes#autorizar_pagamento'
     post 'app/registrar', to: 'app#registrar'
+    post 'app/enviar/mensagem', to: 'app#enviar_mensagem'
     
     get 'helloworld', to: 'cartoes#helloworld'
 

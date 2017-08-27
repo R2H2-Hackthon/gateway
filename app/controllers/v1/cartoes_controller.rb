@@ -59,6 +59,10 @@ module V1
             render json: Visa.new.autorizar_pagamento(params[:id_cartao], params[:valor])
         end
 
+        def solicitar
+            render json: Agillitas.new.solicitar_cartao(params[:id_usuario], params[:valor], params[:senha])
+        end
+
         def helloworld
             render json: Visa.new.helloworld
         end

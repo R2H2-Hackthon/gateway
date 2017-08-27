@@ -28,8 +28,13 @@ class Agillitas
         }
     end
 
-    def habilitar_cartao(id_cartao, id_usuario, valor, senha)
-        
+    def solicitar_cartao(id_usuario, valor, senha)
+        id_cartao = Cartao.where(vinculado: true).first[:proxy]
+
+        habilitar_cartao(id_cartao, id_usuario, valor, senha)        
+    end
+
+    def habilitar_cartao(id_cartao, id_usuario, valor, senha)        
         cartao = Cartao.find_by proxy: id_cartao
         usuario = Usuario.find_by id: id_usuario
         

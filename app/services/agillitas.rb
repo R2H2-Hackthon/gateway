@@ -34,6 +34,20 @@ class Agillitas
         habilitar_cartao(id_cartao, id_usuario, valor, senha)        
     end
 
+    def extrato(id_cartao, data_inicial, data_final)
+        query = {
+            dataInicial: data_inicial,
+            dataFinal: data_final
+        }
+
+        response = self.class.get("/cartoes/#{ id_cartao }/extrato", query: query, headers: @headers)
+
+        pp response.request
+
+
+        response.body
+    end
+
     def habilitar_cartao(id_cartao, id_usuario, valor, senha)        
         cartao = Cartao.find_by proxy: id_cartao
         usuario = Usuario.find_by id: id_usuario

@@ -60,9 +60,17 @@ module V1
         end
 
         def solicitar
-            Agillitas.new.solicitar_cartao(params[:id_usuario], params[:valor], params[:senha])
+            Agillitas.new.solicitar_cartao(params[:id_usuario], 100, 1234)
 
             render json: Usuario.all
+        end
+
+        def extrato_mes_atual
+            render json: Agillitas.new.extrato(
+                params[:id_cartao], 
+                "#{Time.current.year}-#{Time.current.strftime("%m")}-00", 
+                "#{Time.current.year}-#{Time.current.strftime("%m")}-31"
+            )
         end
 
         def helloworld

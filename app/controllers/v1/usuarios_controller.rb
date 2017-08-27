@@ -49,6 +49,8 @@ module V1
     # DELETE /usuarios/1
     def destroy
       @usuario.destroy
+
+      index
     end
 
     private

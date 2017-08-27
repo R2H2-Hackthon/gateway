@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   namespace :v1, :defaults => { :format => 'json' } do
     get 'cartoes/:id_cartao/habilitar/:id_usuario', to: 'cartoes#habilitar_cartao'
     get 'cartoes/:id_cartao/saldo', to: 'cartoes#saldo'
+    get 'cartoes/:id_cartao/status', to: 'cartoes#status'
+    post 'cartoes/:id_cartao/status', to: 'cartoes#alterar_status'
     
     post 'cartoes/:id_cartao/autorizar/pagamento', to: 'cartoes#autorizar_pagamento'
     post 'app/registrar', to: 'app#registrar'

@@ -76,5 +76,17 @@ class Agillitas
         response = self.class.get("/cartoes/#{ id_cartao }/saldo", headers: @headers)
 
         JSON.parse(response.body)['saldo']['valor']
-    end    
+    end  
+    
+    def status(id_cartao)
+        response = self.class.get("/cartoes/#{ id_cartao }/status", headers: @headers)
+    end
+
+    def alterar_status(id_cartao, novo_status)
+        body = { status: novo_status }
+
+        response = self.class.post("/cartoes/#{ id_cartao }/status", body: body.to_json, headers: @headers)
+
+        response.body
+    end
 end
